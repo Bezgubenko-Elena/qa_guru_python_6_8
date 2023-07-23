@@ -23,18 +23,16 @@ class Product:
         else:
             return False
 
-
     def buy(self, quantity):
         """
         TODO реализуйте метод покупки
             Проверьте количество продукта используя метод check_quantity
             Если продуктов не хватает, то выбросите исключение ValueError
         """
-        if Product.check_quantity(quantity):
+        if self.check_quantity(quantity):
             self.quantity -= quantity
         else:
             raise ValueError
-
 
     def __hash__(self):
         return hash(self.name + self.description)
@@ -63,7 +61,6 @@ class Cart:
         else:
             self.products[product] = buy_count
 
-
     def remove_product(self, product: Product, remove_count=None):
         """
         Метод удаления продукта из корзины.
@@ -75,17 +72,14 @@ class Cart:
         else:
             self.products[product] -= remove_count
 
-
     def clear(self):
         self.products.clear()
-
 
     def get_total_price(self) -> float:
         total = 0
         for key, value in self.products.items():
             total += key.price * value
         return total
-
 
     def buy(self):
         """
@@ -94,5 +88,5 @@ class Cart:
         В этом случае нужно выбросить исключение ValueError
         """
         for key, value in self.products.items():
-            if key.quantity < value:
-                raise ValueError
+            key.buy(value)
+        self.clear()
