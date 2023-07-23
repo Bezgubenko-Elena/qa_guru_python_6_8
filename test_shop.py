@@ -101,7 +101,7 @@ class TestCart:
         total_price = my_cart.get_total_price()
         assert type(total_price) == float
 
-    def test_buy(self, my_cart, book, notebook):
+    def test_buy_successful(self, my_cart, book, notebook):
         my_cart.add_product(book, 10)
         my_cart.add_product(notebook, 10)
         my_cart.buy()
