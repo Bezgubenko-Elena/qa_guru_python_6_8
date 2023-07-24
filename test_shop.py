@@ -68,23 +68,22 @@ class TestCart:
         my_cart.add_product(book)
         assert my_cart.products[book] == 1
 
-    def test_remove_product_if_remove_count_None(self, my_cart):
+    def test_remove_product_if_remove_count_None(self, my_cart, book):
         my_cart.add_product(book, 10)
         my_cart.remove_product(book)
-        assert not 'book' in my_cart.products
+        assert book not in my_cart.products
 
-    def test_remove_product_remove_count_less_quantity(self, my_cart):
+    def test_remove_product_remove_count_less_quantity(self, my_cart, book):
         my_cart.add_product(book, 10)
         my_cart.remove_product(book, 5)
         assert my_cart.products[book] == 5
 
-    def test_remove_product_remove_count_more_quantity(self, my_cart):
+    def test_remove_product_remove_count_more_quantity(self, my_cart, book):
         my_cart.add_product(book, 10)
         my_cart.remove_product(book, 15)
-        assert not 'book' in my_cart.products
+        assert book not in my_cart.products
 
-
-    def test_clear_cart(self, my_cart):
+    def test_clear_cart(self, my_cart, book):
         my_cart.add_product(book, 10)
         my_cart.clear()
         assert my_cart.products == {}
